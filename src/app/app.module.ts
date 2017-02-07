@@ -18,10 +18,13 @@ import { GlobalState } from './global.state';
 import { NgaModule } from './theme/nga.module';
 import { PagesModule } from './pages/pages.module';
 
+import {MyHttpService} from './pages/charts/components/chartistJs/http.service'
+
 // Application wide providers
 const APP_PROVIDERS = [
   AppState,
-  GlobalState
+  GlobalState,
+  MyHttpService
 ];
 
 export type StoreType = {

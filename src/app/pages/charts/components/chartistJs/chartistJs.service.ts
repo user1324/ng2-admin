@@ -1,13 +1,15 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {BaThemeConfigProvider} from '../../../../theme';
+import { MyHttpService } from './http.service';
+
+// import {BaThemeConfigProvider} from '../../../../theme';
 
 @Injectable()
 export class ChartistJsService {
 
   private _data = {
     simpleLineOptions: {
-      color: this._baConfig.get().colors.defaultText,
+      color: "red", //this._baConfig.get().colors.defaultText,
       fullWidth: true,
       height: '300px',
       chartPadding: {
@@ -170,11 +172,38 @@ export class ChartistJsService {
     }
   };
 
-  constructor(private _baConfig:BaThemeConfigProvider) {
+  private _dataUrl = 'http://ec2-54-175-21-131.compute-1.amazonaws.com:7000/';
+  testResponse: any;
+
+  constructor(private myHttp: MyHttpService) {
+
   }
 
   public getAll() {
     return this._data;
+  }
+
+  public updateChart(someCallback){
+        this.myHttp.getDataObservable(this._dataUrl).subscribe(
+      data => {
+        this.testResponse = data;
+
+        console.log("I CANT SEE DATA HERE: ", this.testResponse);
+
+        let areaLineData = {
+          labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          series: [
+            [5, 9, 7, 8, 5, 3, 5, 4, 4, 4]
+          ]
+        };
+
+        for (let i = 0; i < 10; ++i) {
+          areaLineData.labels[i] = i + 1;
+          areaLineData.series[0][i] = data[data.length - 11 + i].temperature;
+        }
+
+        someCallback(areaLineData);
+      });
   }
 
   public getResponsive(padding, offset) {

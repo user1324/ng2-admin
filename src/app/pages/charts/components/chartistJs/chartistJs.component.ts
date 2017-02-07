@@ -1,6 +1,7 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
-import {ChartistJsService} from './chartistJs.service';
+
+import { ChartistJsService } from './chartistJs.service';
 import 'style-loader!./chartistJs.scss';
 
 @Component({
@@ -10,13 +11,25 @@ import 'style-loader!./chartistJs.scss';
 
 export class ChartistJs {
 
-  data:any;
+  data: any;
 
-  constructor(private _chartistJsService:ChartistJsService) {
+  constructor(private _chartistJsService: ChartistJsService) {
+  }
+
+  updateChart1() {
+    this._chartistJsService.updateChart(res => {
+      this.data['areaLineData'] = res;
+    });
   }
 
   ngOnInit() {
     this.data = this._chartistJsService.getAll();
+
+    setInterval(_ => {
+    this._chartistJsService.updateChart(res => {
+      this.data['areaLineData'] = res;
+    });
+   }, 5000);
   }
 
   getResponsive(padding, offset) {
