@@ -200,8 +200,8 @@ export class ChartistJsService {
 
         for (let i = 0; i < 10; ++i) {
           areaLineData.labels[i] = i + 1;
-          areaLineData.series[0][i] = data[0][i].temperature;
-          areaLineData.series[1][i] = data[1][i].temperature;
+          areaLineData.series[0][i] = data[0][9 - i].temperature;
+          areaLineData.series[1][i] = data[1][9 - i].temperature;
         }
 
         someCallback(areaLineData);

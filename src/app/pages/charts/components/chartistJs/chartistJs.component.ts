@@ -16,12 +16,6 @@ export class ChartistJs {
   constructor(private _chartistJsService: ChartistJsService) {
   }
 
-  updateChart1() {
-    this._chartistJsService.updateChart(res => {
-      this.data['areaLineData'] = res;
-    });
-  }
-
   ngOnInit() {
     this.data = this._chartistJsService.getAll();
 
@@ -29,7 +23,7 @@ export class ChartistJs {
     this._chartistJsService.updateChart(res => {
       this.data['areaLineData'] = res;
     });
-   }, 5000);
+   }, 2000);
   }
 
   getResponsive(padding, offset) {
