@@ -172,7 +172,7 @@ export class ChartistJsService {
     }
   };
 
-  private _dataUrl = 'http://ec2-54-175-21-131.compute-1.amazonaws.com:7000/';
+  private _dataUrl = 'http://ec2-52-202-222-178.compute-1.amazonaws.com:7000/';
   testResponse: any;
 
   constructor(private myHttp: MyHttpService) {
@@ -193,13 +193,15 @@ export class ChartistJsService {
         let areaLineData = {
           labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
           series: [
-            [5, 9, 7, 8, 5, 3, 5, 4, 4, 4]
+            [5, 9, 7, 8, 5, 3, 5, 4, 4, 4],
+            [3, 5, 8, 4, 6, 4, 5, 9, 7, 5],
           ]
         };
 
         for (let i = 0; i < 10; ++i) {
           areaLineData.labels[i] = i + 1;
-          areaLineData.series[0][i] = data[data.length - 11 + i].temperature;
+          areaLineData.series[0][i] = data[0][i].temperature;
+          areaLineData.series[1][i] = data[1][i].temperature;
         }
 
         someCallback(areaLineData);
